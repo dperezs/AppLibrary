@@ -127,7 +127,7 @@ namespace LibraryApp.Controllers
             var bookItems = await _BookRepository.GetById(id);
             if (bookItems == null)
             {
-                return NotFound(new { data, message = "Id Detalle  no existe en la base de datos o no está asociado a un ID " });
+                return NotFound(new { data, message = "El registro no existe en la base de datos o no está asociado a un ID " });
             }
             try
             {

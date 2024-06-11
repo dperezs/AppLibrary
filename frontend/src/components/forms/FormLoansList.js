@@ -74,7 +74,7 @@ import {
     }
     const Delete = () => {
       setModal(!modal);
-      endpoints.FormBook.Delete(formCatalogo.id)
+      endpoints.FormLoans.Delete(formCatalogo.id)
       .then(response => {     
     
           if (response.message)                     

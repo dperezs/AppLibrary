@@ -1,4 +1,5 @@
-﻿using DataAccess.Services.Books;
+﻿using DataAccess.Services.BookLoans;
+using DataAccess.Services.Books;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DataAccess.Services
     {
         public TransientConfig(IServiceCollection services) {
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IBookLoansRepository, BookLoansRepository>();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper.Internal.Mappers;
 using Contract.BookLoans;
 using Contract.Books;
+using DataAccess.Services.BookLoans;
+using DataAccess.Services.Books;
 using EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +16,14 @@ namespace LibraryApp.Controllers
     [ApiController]
     public class BookLoanController : ControllerBase
     {
-        private LibraryContext _context;
-        
+        private readonly IBookLoansRepository _BookLoansRepository;
+        private readonly IBookRepository _BookRepository;
 
-        public BookLoanController(LibraryContext context)
+
+        public BookLoanController(IBookLoansRepository bookLoansRepository, IBookRepository BookRepository)
         {
-            _context = context;            
-
+            _BookLoansRepository = bookLoansRepository;
+            _BookRepository = BookRepository;
         }
 
         // GET: api/<ValuesController>
@@ -34,8 +37,8 @@ namespace LibraryApp.Controllers
             string message = null;
             try
             {
-                var result = await _context.BookLoans.Include(x=>x.Book).ToListAsync();
-                parametros = mapper.Map<List<BookLoan>, List<BookLoanDto>>(result);
+                var result = await _BookLoansRepository.GetAll();
+                parametros = mapper.Map<IEnumerable<BookLoan>, IEnumerable<BookLoanDto>>(result);
                 if (parametros == null)
                 {
                     return NotFound(new { data, message = "No se encontró la información solicitada" });
@@ -56,7 +59,7 @@ namespace LibraryApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BookLoan>> Get(int id)
         {
-            var bookItems = await _context.BookLoans.FindAsync(id);
+            var bookItems = await _BookLoansRepository.GetById(id);
             if (bookItems == null)
             {
                 return NotFound();
@@ -71,12 +74,11 @@ namespace LibraryApp.Controllers
         {
             string message = null;
 
-            var book = await _context.Books.FindAsync(data.BookId);
+            var book = await _BookRepository.GetById(data.BookId);
 
-            if (book != null && ValidaExistencia(book)) {
+            if (book != null && _BookLoansRepository.ValidaExistencia(book)) {
                 var bookLoan = new BookLoan(book, data.Person, data.Status);
-                _context.BookLoans.Add(bookLoan);
-                await _context.SaveChangesAsync();
+                await _BookLoansRepository.Add(bookLoan); 
                 return CreatedAtAction(
                 nameof(Get),
                 new { id = bookLoan.Id },
@@ -99,62 +101,66 @@ namespace LibraryApp.Controllers
                 return NotFound(new { data, message = "Id  no coincide con Id del Objeto o Formulario " + "Valor entidad: " + id + ", Valor parametro: " + data.Id });
             }
 
-            var bookLoan = await _context.BookLoans.FindAsync(id);
+            var bookLoan = await _BookLoansRepository.GetById(id);
             if (bookLoan == null)
             {
                 return NotFound(new { data, message = "Id  no existe en la base de datos o no está asociado a un ID del Libro " });
             }
-
-            var book = await _context.Books.FindAsync(data.BookId);
-            bookLoan.AddUpdateBookLoan(book, data.Person, data.Status);
+            var book = await _BookRepository.GetById(data.BookId);
+                        
+            
 
             try
             {
-                await _context.SaveChangesAsync();
+                if (book != null && _BookLoansRepository.ValidaExistencia(book))
+                {
+                    bookLoan.AddUpdateBookLoan(book, data.Person, data.Status);
+                    await _BookLoansRepository.Update(bookLoan);
+                }
+                else
+                    return NotFound(new { data, message = "No hay existencia de libros." });
             }
-            catch (DbUpdateConcurrencyException) when (!BookLoanItemExists(id))
+            catch (DbUpdateConcurrencyException) when (!_BookLoansRepository.BookLoanItemExists(id))
             {
-                return NotFound();
+                return NotFound(new { data, message = "Existen registros de Libros utilizados en procesos del Sistema " });
             }
 
             Response.StatusCode = StatusCodes.Status200OK;
             return new JsonResult(new { data, message = message });
         }
-        private bool BookLoanItemExists(long id)
-        {
-            return _context.BookLoans.Any(e => e.Id == id);
-        }
-        private bool ValidaExistencia(Book book)
-        {
-            var loan = _context.BookLoans.Any(e => e.Book.Id == book.Id);
-
-            if (loan!=null) {
-                var queryable = _context.BookLoans.Where(x => x.Book.Id == book.Id && x.Status == "Prestamo").GroupBy(x => x.Book.Id)
-
-                .Select(x => new
-                {
-                    x.Key,
-                    books = x.Count()
-                }).FirstOrDefault();
-
-                return queryable != null ? queryable?.books < book.NoCopies : true;
-            }
-            return false;
-        }
+        
+        
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
-            var todoItem = await _context.BookLoans.FindAsync(id);
-            if (todoItem == null)
+            string message = null;
+            BookLoan data = new BookLoan();
+            data = null;
+
+            var BookLoanItem = await _BookLoansRepository.GetById(id);
+            if (BookLoanItem == null)
             {
-                return NotFound();
+                return NotFound(new { data, message = "El registro no existe en la base de datos o no está asociado a un ID " });
             }
 
-            _context.BookLoans.Remove(todoItem);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _BookLoansRepository.Delete(BookLoanItem);
+            }
+            catch (System.Data.ConstraintException ex)
+            {
+                return NotFound(new { data, message = "Existen registros de Libros utilizados en procesos del Sistema " });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { data, message = "Hubo un error en base de datos, notifique al administrador :  " + ex.Message.ToString() + "," + ex.StackTrace.ToString() });
+            }
 
-            return NoContent();
+
+
+            Response.StatusCode = StatusCodes.Status200OK;
+            return new JsonResult(new { message });
         }
     }
 }

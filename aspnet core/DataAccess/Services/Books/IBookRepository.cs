@@ -5,7 +5,7 @@ namespace DataAccess.Services.Books
     public interface IBookRepository
     {
         Task<IEnumerable<Book>> GetAll();
-        Task<Book> GetById(long id);
+        Task<Book> GetById(long id);        
         Task Add(Book entity);
         Task Update(Book entity);
         Task Delete(Book entity);
