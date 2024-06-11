@@ -1,0 +1,22 @@
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\bin\Debug\net8.0\Contract.deps.json
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\bin\Debug\net8.0\Contract.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\bin\Debug\net8.0\Contract.pdb
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.AssemblyInfoInputs.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.AssemblyInfo.cs
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.csproj.CoreCompileInputs.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\refint\Contract.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\Contract.pdb
+C:\Users\ONE-EC026\source\repos\LibraryApp\Contract\obj\Debug\net8.0\ref\Contract.dll
+D:\Testing Web\LibraryApp\Contract\bin\Debug\net8.0\Contract.deps.json
+D:\Testing Web\LibraryApp\Contract\bin\Debug\net8.0\Contract.dll
+D:\Testing Web\LibraryApp\Contract\bin\Debug\net8.0\Contract.pdb
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.GeneratedMSBuildEditorConfig.editorconfig
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.AssemblyInfoInputs.cache
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.AssemblyInfo.cs
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.csproj.CoreCompileInputs.cache
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.dll
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\refint\Contract.dll
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\Contract.pdb
+D:\Testing Web\LibraryApp\Contract\obj\Debug\net8.0\ref\Contract.dll

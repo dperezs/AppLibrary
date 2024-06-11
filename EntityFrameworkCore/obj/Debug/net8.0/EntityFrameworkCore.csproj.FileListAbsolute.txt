@@ -1,0 +1,28 @@
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.deps.json
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.runtimeconfig.json
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.pdb
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.csproj.AssemblyReference.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.AssemblyInfoInputs.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.AssemblyInfo.cs
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.csproj.CoreCompileInputs.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\refint\EntityFrameworkCore.dll
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.pdb
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.genruntimeconfig.cache
+C:\Users\ONE-EC026\source\repos\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\ref\EntityFrameworkCore.dll
+D:\Testing Web\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.deps.json
+D:\Testing Web\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.runtimeconfig.json
+D:\Testing Web\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.dll
+D:\Testing Web\LibraryApp\EntityFrameworkCore\bin\Debug\net8.0\EntityFrameworkCore.pdb
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.csproj.AssemblyReference.cache
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.AssemblyInfoInputs.cache
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.AssemblyInfo.cs
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.csproj.CoreCompileInputs.cache
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.dll
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\refint\EntityFrameworkCore.dll
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.pdb
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\EntityFrameworkCore.genruntimeconfig.cache
+D:\Testing Web\LibraryApp\EntityFrameworkCore\obj\Debug\net8.0\ref\EntityFrameworkCore.dll
