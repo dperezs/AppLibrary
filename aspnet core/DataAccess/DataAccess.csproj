@@ -10,8 +10,4 @@
     <ProjectReference Include="..\EntityFrameworkCore\EntityFrameworkCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

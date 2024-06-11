@@ -53,6 +53,7 @@ import {
         endpoints.FormBook.Update(formBook)
         .then(response => {							
           if (response.message){
+            setVisible(true);
             setMensajeError(response.message);          
           }						
           else{          
@@ -62,8 +63,10 @@ import {
       }else {
         endpoints.FormBook.Add(formBook)
             .then(response => {   
-              if (response.mensajeError)                     
+              if (response.message)  {
+                setVisible(true);                 
                 setMensajeError(response.message);          
+              }                  
               else
                 navigate("/formBook");
             });
@@ -76,7 +79,16 @@ import {
       setVisible(false);
     };
     return (
-      <><Row>
+      <>
+      <Alert
+        color="primary"
+        isOpen={visible}
+        toggle={onDismiss.bind(null)}
+        fade={true}
+        >
+        {mensajeError}
+    </Alert>
+      <Row>
       <Col>
         {/* --------------------------------------------------------------------------------*/}
         {/* Card-1*/}
@@ -112,14 +124,7 @@ import {
         </Card>
       </Col>
     </Row>
-    <Alert
-        color="primary"
-        isOpen={visible}
-        toggle={onDismiss.bind(null)}
-        fade={true}
-        >
-        I am a primary alert and I can be dismissed without animating!
-    </Alert>
+    
       </>
         
         

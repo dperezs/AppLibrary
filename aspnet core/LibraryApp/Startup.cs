@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using DataAccess.Services;
+using System.Configuration;
 
 namespace LibraryApp
 {
@@ -27,6 +28,8 @@ namespace LibraryApp
             });
 
             services.AddControllers();
+            // intento de organizar las inyecciones de dependencias a travez de una clase de configuración
+            TransientConfig transientConfig = new TransientConfig(services);
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -43,12 +43,12 @@ const navigation = [
   //   icon: "bi bi-textarea-resize",
   // },
   {
-    title: "FormBook",
+    title: "Libros",
     href: "/formBook",
     icon: "bi bi-textarea-resize",
   },
   {
-    title: "FormLoans",
+    title: "Prestamos",
     href: "/formLoans",
     icon: "bi bi-textarea-resize",
   },
@@ -98,15 +98,6 @@ const Sidebar = () => {
               </Link>
             </NavItem>
           ))}
-          <Button
-            color="danger"
-            tag="a"
-            target="_blank"
-            className="mt-3"
-            href="https://www.wrappixel.com/templates/adminpro-react-redux-admin/?ref=33"
-          >
-            Upgrade To Pro
-          </Button>
         </Nav>
       </div>
     </div>

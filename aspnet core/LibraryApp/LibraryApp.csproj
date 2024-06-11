@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contract\Contract.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\EntityFrameworkCore\EntityFrameworkCore.csproj" />
   </ItemGroup>
 

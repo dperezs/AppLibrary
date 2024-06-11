@@ -2,6 +2,7 @@
 using AutoMapper.Internal.Mappers;
 using Contract.BookLoans;
 using Contract.Books;
+using DataAccess.Services.Books;
 using EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Project;
@@ -19,10 +20,10 @@ namespace LibraryApp.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private LibraryContext _context;
-        public BooksController(LibraryContext context)
+        private readonly IBookRepository _BookRepository;
+        public BooksController(IBookRepository BookRepository)
         {
-            _context = context;
+            _BookRepository = BookRepository;
         }
         // GET: api/<ValuesController>
         [HttpGet]
@@ -34,8 +35,8 @@ namespace LibraryApp.Controllers
             string message = null;
             try
             {
-                var result = await _context.Books.ToListAsync();
-                parametros = mapper.Map<List<Book>, List<BookDto>>(result);
+                var result = await _BookRepository.GetAll();
+                parametros = mapper.Map<IEnumerable<Book>, IEnumerable<BookDto>>(result);
                 if (parametros == null)
                 {
                     return NotFound(new { data, message = "No se encontró la información solicitada" });
@@ -55,7 +56,7 @@ namespace LibraryApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> Get(long id)
         {
-            var bookItems =  await _context.Books.FindAsync(id);
+            var bookItems =  await _BookRepository.GetById(id);
             if (bookItems == null)
             {
                 return NotFound();
@@ -69,12 +70,16 @@ namespace LibraryApp.Controllers
         public async Task<ActionResult<Book>> Post([FromBody] BookDto data)
         {
             var book = new Book( data.Name, data.NoCopies, data.Description);
-            _context.Books.Add(book);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(
-            nameof(Get),
-            new { id = book.Id },
-                book);
+            var books = _BookRepository.GetByName(data.Name);
+            if (books.Count()==0) {
+                await _BookRepository.Add(book);
+                return CreatedAtAction(
+                nameof(Get),
+                new { id = book.Id },
+                    book);
+            }else
+                return NotFound(new { data, message = "El titulo del libro ya existe" });
+
 
         }
 
@@ -90,18 +95,19 @@ namespace LibraryApp.Controllers
                 return NotFound(new { data, message = "Id  no coincide con Id del Objeto o Formulario " + "Valor entidad: " + id + ", Valor parametro: " + data.Id });
             }
 
-            var book = await _context.Books.FindAsync(id);
+            var book = await _BookRepository.GetById(id);
             if (book == null)
             {
                 return NotFound(new { data, message = "Id  no existe en la base de datos o no está asociado a un ID del Libro " });
             }
             book.AddUpdateBook(data.Name, data.NoCopies, data.Description);
+            
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _BookRepository.Update(book);
             }
-            catch (DbUpdateConcurrencyException) when (!BookItemExists(id))
+            catch (DbUpdateConcurrencyException) when (!_BookRepository.BookItemExists(id))
             {
                 return NotFound();
             }
@@ -109,10 +115,7 @@ namespace LibraryApp.Controllers
             Response.StatusCode = StatusCodes.Status200OK;
             return new JsonResult(new { data, message = message });
         }
-        private bool BookItemExists(long id)
-        {
-            return _context.Books.Any(e => e.Id == id);
-        }
+        
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
@@ -120,17 +123,15 @@ namespace LibraryApp.Controllers
         {
             string message = null;
             Book data = new Book();
-            data = null;
-            string idvalue = Convert.ToString(id);
-            var bookItems = await _context.Books.FindAsync(id);
+            data = null;            
+            var bookItems = await _BookRepository.GetById(id);
             if (bookItems == null)
             {
                 return NotFound(new { data, message = "Id Detalle  no existe en la base de datos o no está asociado a un ID " });
             }
             try
             {
-                _context.Books.Remove(bookItems);
-                await _context.SaveChangesAsync();
+                await _BookRepository.Delete(bookItems);
             }
             catch (System.Data.ConstraintException ex)
             {
